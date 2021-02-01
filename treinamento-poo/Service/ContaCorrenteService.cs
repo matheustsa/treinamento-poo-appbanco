@@ -1,71 +1,89 @@
 ﻿using System;
+using System.Collections.Generic;
 using treinamento_poo.Model;
+using static treinamento_poo.Utils.Utils;
 
 namespace treinamento_poo.Service
 {
     public class ContaCorrenteService
     {
-        public void OperacaoSaque()
+
+        public void OperacaoDeposito(ContaCorrente myAccount)
         {
-            Console.WriteLine();
-            Console.WriteLine("Digite seu nome: " + "\n");
-            var nome = Console.ReadLine();
-            Console.WriteLine("Informe um valor que deseja sacar: " + "\n");
+            Console.Clear();
+            Console.WriteLine("=== DEPÓSITO ===" + "\n");
+            Console.WriteLine($"Saldo na conta: {myAccount.Saldo}" + "\n\n");
+            Console.WriteLine("Depositar: R$ ");
 
             var valor = Convert.ToDouble(Console.ReadLine());
-
-            var conta = new ContaCorrente()
-            {
-                Agencia = 8792,
-                Titular = "Jéssica",
-                Numero = 36921,
-                Saldo = 5000
-            };
-
-            var saque = Sacar(valor, conta.Saldo);
+            Depositar(valor, myAccount);
 
             Console.WriteLine("------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Dados da conta do cliente");
             Console.WriteLine();
-            Console.WriteLine($"Olá {nome}," + "\n" + "saque realizado com sucesso!" + "\n" + $"Valor da retirada: {valor}" + "\n");
-            Console.WriteLine($"Agencia: {conta.Agencia}" + "\n" + $"Numero: {conta.Numero}" + "\n" + $"Saldo: {saque}");
-            Console.ReadKey();
+            Console.WriteLine($"Olá {myAccount.Titular}," + "\n" + "depósito realizado com sucesso!" + "\n" + $"Valor do depósito: {valor}" + "\n");
+            Console.WriteLine($"Agencia: {myAccount.Agencia}" + "\n" + $"Numero: {myAccount.Numero}" + "\n" + $"Saldo: {myAccount.Saldo}");
+            Console.WriteLine();
             Console.WriteLine("------------------------------------");
             Console.ReadKey();
+
         }
 
-        public void OperacaoDeposito()
+        private void Depositar(double valor, ContaCorrente account)
+        { 
+            account.Saldo += valor;
+        }
+
+        public void OperacaoSaque(ContaCorrente myAccount)
         {
-            Console.WriteLine();
-            Console.WriteLine("Digite seu nome: " + "\n");
-            var nome = Console.ReadLine();
-            Console.WriteLine("Informe um valor que deseja depositar: " + "\n");
+            Console.Clear();
+            Console.WriteLine("=== SAQUE ===" + "\n");
+            Console.WriteLine($"Saldo disponível: {myAccount.Saldo}" + "\n\n");
+            Console.WriteLine("Sacar: R$ ");
 
             var valor = Convert.ToDouble(Console.ReadLine());
-
-            var conta = new ContaCorrente()
-            {
-                Agencia = 8792,
-                Titular = "Jéssica",
-                Numero = 36921,
-                Saldo = 5000
-            };
-
-            var deposito = Depositar(valor, conta.Saldo);
+            Sacar(valor, myAccount);
 
             Console.WriteLine("------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Dados da conta do cliente");
             Console.WriteLine();
-            Console.WriteLine($"Olá {nome}," + "\n" + "seu depósito foi realizado com sucesso!" + "\n" + $"Valor do depósito: {valor}" + "\n");
-            Console.WriteLine($"Agencia: {conta.Agencia}" + "\n" + $"Numero: {conta.Numero}" + "\n" + $"Saldo: {deposito}");
-            Console.ReadKey();
+            Console.WriteLine($"Olá {myAccount.Titular}," + "\n" + "saque realizado com sucesso!" + "\n" + $"Valor da retirada: {valor}" + "\n");
+            Console.WriteLine($"Agencia: {myAccount.Agencia}" + "\n" + $"Numero: {myAccount.Numero}" + "\n" + $"Saldo: {myAccount.Saldo}");
+            Console.WriteLine();
             Console.WriteLine("------------------------------------");
             Console.ReadKey();
         }
 
-        public void OperacaoTransferencia()
+        private void Sacar(double valor, ContaCorrente account)
+        {
+
+            if (valor > account.Saldo)
+            {
+                Console.WriteLine($"Não foi possível concluir a transação. Seu saldo {account.Saldo} é inferior ao valor do saque {valor}.");
+                Console.ReadKey();
+            }
+            else
+            {
+                account.Saldo -= valor;
+            }
+
+        }
+
+        internal void OperacaoConsultaSaldo(ContaCorrente myAccount)
+        {
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine("Dados da conta do cliente");
+            Console.WriteLine();
+            Console.WriteLine($"Titular: {myAccount.Titular}" + $"Agencia: {myAccount.Agencia}" + "\n" + $"Numero: {myAccount.Numero}" + "\n" + $"Saldo: {myAccount.Saldo}");
+            Console.WriteLine();
+            Console.WriteLine("------------------------------------");
+            Console.ReadKey();
+        }
+
+        public void OperacaoTransferencia(ContaCorrente myAccount, ContaCorrente contaDestino)
         {
             Console.WriteLine();
             Console.WriteLine("Digite seu nome: " + "\n");
@@ -74,51 +92,13 @@ namespace treinamento_poo.Service
 
             var valor = Convert.ToDouble(Console.ReadLine());
 
-            var conta = new ContaCorrente()
-            {
-                Agencia = 8792,
-                Titular = "Jéssica",
-                Numero = 36921,
-                Saldo = 5000
-            };
-
-            var contaDestino = new ContaCorrente()
-            {
-                Agencia = 01415,
-                Titular = "Dona Maria",
-                Numero = 0001,
-                Saldo = 1000
-            };
-
-            var transferencia = Transferir(valor, conta.Saldo, contaDestino);
+            var transferencia = Transferir(valor, myAccount.Saldo, contaDestino);
 
             Console.WriteLine("------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Dados da conta do cliente");
             Console.WriteLine();
             Console.WriteLine($"Olá {nome}," + "\n" + "a transferência realizada com sucesso!" + "\n");
-        }
-
-        private double Sacar(double valor, double saldo)
-        {
-            if (valor > saldo)
-            {
-                Console.WriteLine($"Não foi possível concluir a transação. Seu saldo {saldo} é inferior ao valor do saque {valor}.");
-                Console.ReadKey();
-            }
-            else
-            {
-                saldo -= valor;
-                return saldo;
-            }
-
-            return saldo;
-        }
-
-        private double Depositar(double valor, double saldo)
-        {
-            saldo += valor;
-            return saldo;
         }
 
         private bool Transferir(double valor, double saldo, ContaCorrente contaDestino)
@@ -130,7 +110,8 @@ namespace treinamento_poo.Service
             }
 
             saldo -= valor;
-            Depositar(valor, saldo);
+
+            Depositar(valor, contaDestino);
             Console.WriteLine($"Transferência realizada com sucesso! Seu saldo é de: {saldo}");
             Console.WriteLine();
             Console.WriteLine("Dados da conta destino");

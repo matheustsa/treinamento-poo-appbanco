@@ -1,7 +1,9 @@
 ﻿using System;
 using treinamento_poo.Service;
+using treinamento_poo.Model;
 using System.Threading;
 using static treinamento_poo.Utils.Utils;
+using System.Collections.Generic;
 
 namespace treinamento_poo
 {
@@ -11,7 +13,8 @@ namespace treinamento_poo
         {
 
             SplashScreen();
-
+            ContaCorrente myAccount = new ContaCorrente(001, "Matheus", 9999, 5000);
+            List<ContaCorrente> clientsList = CreateAccounts();
             do
             {
                 while (!Console.KeyAvailable)
@@ -32,19 +35,19 @@ namespace treinamento_poo
                     switch (opcao.KeyChar)
                     {
                         case '1':
-                            new ContaCorrenteService().OperacaoDeposito();
+                            new ContaCorrenteService().OperacaoDeposito(myAccount);
                             break;
 
                         case '2':
-                            new ContaCorrenteService().OperacaoSaque();
+                            new ContaCorrenteService().OperacaoSaque(myAccount);
                             break;
 
                         case '3':
-                            new ContaCorrenteService().OperacaoTransferencia();
+                            new ContaCorrenteService().OperacaoTransferencia(myAccount, clientsList[1]);
                             break;
 
                         case '4':
-                            new ContaCorrenteService().OperacaoConsultaSaldo();
+                            new ContaCorrenteService().OperacaoConsultaSaldo(myAccount);
                             break;
                         case '0':
                             Console.WriteLine("\n\nAgradecemos à preferencia!");

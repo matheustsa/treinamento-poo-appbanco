@@ -60,38 +60,31 @@ namespace treinamento_poo.Utils
             Console.WriteLine("");
         }
 
-        public static List<ContaCorrente> CreateAccounts()
+        public static List<ContaCorrente> CriarOutrasContas()
         {
 
-            var accounts = new List<ContaCorrente>();
-            string[] clients = {"Henrique", "Jéssica", "Isabela", "Thales" };
+            var listaDeContas = new List<ContaCorrente>();
+            string[] clientes = {"Henrique", "Jéssica", "Isabela", "Thales" };
 
-            for (int i = 0; i < clients.Length; i++)
+            for (int i = 0; i < clientes.Length; i++)
             {
-                var newAccount = new ContaCorrente(
+                var novaConta = new ContaCorrente(
                     001,
-                    clients[i],
+                    clientes[i],
                     Convert.ToInt32($"{i + 1}{i + 1}{i + 1}{i + 1}"),
                     5000
                 );
 
-                accounts.Add(newAccount);
+                listaDeContas.Add(novaConta);
             }
 
-            return accounts;
+            return listaDeContas;
         }
 
-        public static ContaCorrente CreateMyAccount()
+        public static ContaCorrente CriarMinhaConta()
         {
-            ContaCorrente myAccount = new ContaCorrente(001, "Matheus", 9999, 5000);
-            return myAccount;
-        }
-
-        public static void ShowAccountDetails(ContaCorrente account)
-        {
-            Console.WriteLine($"Titular: {account.Titular}" + "\n" + $"Agencia: {account.Agencia}" + "\n" + $"Numero: {account.Numero}" + "\n" + $"Novo Saldo: {account.Saldo}");
-            Console.WriteLine("------------------------------------");
-            Console.ReadKey();
+            ContaCorrente minhaConta = new ContaCorrente(001, "Matheus", 9999, 5000);
+            return minhaConta;
         }
 
     }

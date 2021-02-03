@@ -13,8 +13,8 @@ namespace treinamento_poo
         {
 
             SplashScreen();
-            ContaCorrente myAccount = new ContaCorrente(001, "Matheus", 9999, 5000);
-            List<ContaCorrente> clientsList = CreateAccounts();
+            ContaCorrente minhaConta = CriarMinhaConta();
+            List<ContaCorrente> listaDeContas = CriarOutrasContas();
 
             {
                 while (!Console.KeyAvailable)
@@ -26,19 +26,19 @@ namespace treinamento_poo
                     switch (opcao.KeyChar)
                     {
                         case '1':
-                            new ContaCorrenteService().OperacaoDeposito(myAccount);
+                            new ContaCorrenteService().OperacaoDeposito(minhaConta);
                             break;
 
                         case '2':
-                            new ContaCorrenteService().OperacaoSaque(myAccount);
+                            new ContaCorrenteService().OperacaoSaque(minhaConta);
                             break;
 
                         case '3':
-                            new ContaCorrenteService().OperacaoTransferencia(myAccount, clientsList);
+                            new ContaCorrenteService().OperacaoTransferencia(minhaConta, listaDeContas);
                             break;
 
                         case '4':
-                            new ContaCorrenteService().OperacaoConsultaSaldo(myAccount);
+                            new ContaCorrenteService().OperacaoConsultaSaldo(minhaConta);
                             break;
                         case '0':
                             Console.WriteLine("\n\nAgradecemos à preferencia!");

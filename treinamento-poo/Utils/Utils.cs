@@ -45,11 +45,26 @@ namespace treinamento_poo.Utils
             Console.Clear();
         }
 
+        public static void ExibeMenu()
+        {
+
+            // Exibe menu de opções para o usuário selecionar
+            Console.Clear();
+            Console.WriteLine(" ..:: MENU ::..");
+            Console.WriteLine();
+            Console.WriteLine("1 - Depósito");
+            Console.WriteLine("2 - Saque");
+            Console.WriteLine("3 - Transferência");
+            Console.WriteLine("4 - Consultar Saldo");
+            Console.WriteLine("0 - Sair");
+            Console.WriteLine("");
+        }
+
         public static List<ContaCorrente> CreateAccounts()
         {
 
             var accounts = new List<ContaCorrente>();
-            string[] clients = { "Jéssica", "Henrique", "Isabela", "Thales" };
+            string[] clients = {"Henrique", "Jéssica", "Isabela", "Thales" };
 
             for (int i = 0; i < clients.Length; i++)
             {

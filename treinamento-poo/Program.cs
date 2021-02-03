@@ -15,21 +15,12 @@ namespace treinamento_poo
             SplashScreen();
             ContaCorrente myAccount = new ContaCorrente(001, "Matheus", 9999, 5000);
             List<ContaCorrente> clientsList = CreateAccounts();
-            do
+
             {
                 while (!Console.KeyAvailable)
                 {
-                    // Exibe menu de opções para o usuário selecionar
-                    Console.WriteLine(" ..:: Selecione uma opção ::..");
-                    Console.WriteLine();
-                    Console.WriteLine("1 - Depósito");
-                    Console.WriteLine("2 - Saque");
-                    Console.WriteLine("3 - Transferência");
-                    Console.WriteLine("4 - Consultar Saldo");
-                    Console.WriteLine("0 - Sair");
-                    Console.WriteLine("");
 
-                    // obtem a opção selecionada pelo usuário
+                    ExibeMenu();
                     var opcao = Console.ReadKey();
 
                     switch (opcao.KeyChar)
@@ -43,7 +34,7 @@ namespace treinamento_poo
                             break;
 
                         case '3':
-                            new ContaCorrenteService().OperacaoTransferencia(myAccount, clientsList[1]);
+                            new ContaCorrenteService().OperacaoTransferencia(myAccount, clientsList);
                             break;
 
                         case '4':
